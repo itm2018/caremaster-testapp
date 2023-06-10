@@ -4,11 +4,15 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\CompanyUpdateRequest;
+use App\Mail\CompanyCreated;
 use App\Models\Company;
 use http\Exception\UnexpectedValueException;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
+use Mockery\Exception;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class CompanyController extends Controller
@@ -41,7 +45,28 @@ class CompanyController extends Controller
          */
         try {
             $company = new Company($request->validated());
-            $company->save();
+            /*
+             * Save logo if exists
+             */
+            if ($request->hasFile('logo')) {
+                $oriName = $request->file('logo')->getClientOriginalName();
+                //add a timestamp to make sure image name is unique
+                $uniqueName = time() . $oriName;
+                $path = 'logos/' . $uniqueName;
+                Storage::disk('local')->put($path, file_get_contents($request->file('logo')));
+                $company->setAttribute('logo', $uniqueName);
+            }
+            if ($company->save()) {
+                /**
+                 * Send mail if company was created
+                 */
+                try {
+                    Mail::to(env('MAIL_TO_ADDRESS'))->send(new CompanyCreated($company));
+                } catch (\Exception $e) {
+                    Log::warning($e->getMessage());
+                }
+            }
+
             return redirect(route('company.edit', $company))->with('success', 'You have successfully created a new company');
         } catch (QueryException $q) {
             $message = $q->getMessage();
