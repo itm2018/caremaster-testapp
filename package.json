@@ -1,0 +1,33 @@
+{
+    "private": true,
+    "type": "module",
+    "scripts": {
+        "dev": "vite",
+        "build": "vue-tsc && vite build && vite build --ssr"
+    },
+    "devDependencies": {
+        "@inertiajs/vue3": "^1.0.0",
+        "@tailwindcss/forms": "^0.5.3",
+        "@types/ziggy-js": "^1.3.2",
+        "@vitejs/plugin-vue": "^4.0.0",
+        "@vue/server-renderer": "^3.2.31",
+        "autoprefixer": "^10.4.12",
+        "axios": "^1.1.2",
+        "laravel-vite-plugin": "^0.7.5",
+        "postcss": "^8.4.18",
+        "tailwindcss": "^3.2.1",
+        "typescript": "^5.0.2",
+        "vite": "^4.0.0",
+        "vue": "^3.2.41",
+        "vue-tsc": "^1.2.0",
+        "vee-validate": "^4.5.11",
+        "yup": "^0.32.11",
+        "vue-router": "^4.0.3",
+        "vue-toastification": "^2.0.0-rc.5",
+        "vue-cleave-component": "^3.0.2",
+        "@iconify/vue": "^3.2.1",
+        "animate.css": "^4.1.1",
+        "vue-good-table-next": "^0.2.1",
+        "sass": "^1.26.9"
+    }
+}
