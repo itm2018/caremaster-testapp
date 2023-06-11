@@ -31,3 +31,15 @@ test('users can not authenticate with invalid password', function () {
 
     $this->assertGuest();
 });
+
+test ('test user cannot view a login form when authenticated', function (){
+    $user = User::factory()->create();
+
+    $response = $this->post('/login', [
+        'email' => $user->email,
+        'password' => 'password',
+    ]);
+
+    $this->actingAs($user)->get('/login');
+    $response->assertRedirect(RouteServiceProvider::HOME);
+});

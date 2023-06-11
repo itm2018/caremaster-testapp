@@ -28,7 +28,10 @@
             let r = (Math.random() + 1).toString(36).substring(7).toUpperCase();
             //let user confirm exactly this string
             let c = prompt('Type in this letters (case insensitive) to delete: ' + r);
-            if (c.toUpperCase() !== r) {
+            if (c == null) {
+                return false;
+            }
+            if (c.toUpperCase() != r) {
                 alert('Please do it again!');
                 return false;
             }

@@ -18,4 +18,7 @@ MAIL_FROM_NAME="${APP_NAME}"
 MAIL_TO_ADDRESS=recipient email
 MAIL_TO_NAME="CUSTOMER"
 
+## Step 4: Run tests
+- php artisan test
+
 ### Note*: Sometimes there is a weird error of mysql connection, if that's happening, and if you're running migration or seeding data, please switch mysql DB_HOST=127.0.0.1 or DB_HOST=mysql if you're running web application

@@ -9,7 +9,7 @@
                     <!-- jquery validation -->
                     <div class="card card-primary">
                         <div class="card-header">
-                            <h3 class="card-title">Edit Employee</h3>
+                            <h3 class="card-title">Create Employee</h3>
                         </div>
                         <!-- /.card-header -->
                         <div class="bordered message col-12 card-default">

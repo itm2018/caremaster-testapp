@@ -62,6 +62,7 @@ class CompanyController extends Controller
                  */
                 try {
                     Mail::to(env('MAIL_TO_ADDRESS'))->send(new CompanyCreated($company));
+                    Log::log('info', 'Sent mail to ' . env('MAIL_TO_ADDRESS'));
                 } catch (\Exception $e) {
                     Log::warning($e->getMessage());
                 }
